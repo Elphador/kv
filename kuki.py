@@ -56,7 +56,7 @@ cli = MongoClient(mongodb); db = cli.database; cuser = db.cuser ; cadmin = db.ca
 
     
 
-@app.on_message(filters.private & filters.command("cast"))
+@app.on_message(filters.command("cast"))
 
 async def cast_mesg(bot,msg):
 
@@ -176,7 +176,7 @@ def channel_force(bot , msg):
 
     
 
-@app.on_message(filters.private & filters.command("set") )
+@app.on_message(filters.command("set") )
 
 def set_admin(bot, msg):
 
@@ -294,7 +294,7 @@ def newbot(bot, msg):
 
     
 
-@app.on_message(filters.private & filters.command("start"))
+@app.on_message( filters.command("start"))
 
 async def start(bot, msg):
 
@@ -324,7 +324,7 @@ async def start(bot, msg):
 
     reply_markup= markup )
 
-@app.on_message(filters.private & filters.command("feedback"))
+@app.on_message( filters.command("feedback"))
 
 async def feeback (bot , msg):
 
@@ -370,7 +370,7 @@ async def userslist(bot,msg):
 
 #always we change the codes down here for different bots just we copy and paste the above code to implement all functions on each of our bots , you can take some actions if it's needed, aka , if you need 
 
-@app.on_message(filters.private & filters.text)
+@app.on_message( filters.text)
 
 async def kuki(bot, msg):
 
