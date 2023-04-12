@@ -397,13 +397,9 @@ async def kuki(bot, msg):
     try :
 
       data = {
-
-    'uid': 'fc7d3c43414333f5',
-
+    'uid': '7bbfe7ea7a1eeea4',
     'input': msg.text,
-
-    'sessionid': '483799066',
-
+    'sessionid': '483805423',
 }
 
       resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
@@ -414,7 +410,7 @@ async def kuki(bot, msg):
 
       await msg.reply(lst)
 
-    except :
+    except KeyError :
 
         header = {'Content-Type': 'application/x-www-form-urlencoded',}
 
