@@ -393,6 +393,8 @@ async def kuki(bot, msg):
     else :
 
         pass
+    msg.reply_chat_action(enums.ChatAction.TYPING)
+     
 
     try :
 
