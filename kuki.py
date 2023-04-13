@@ -393,15 +393,15 @@ async def kuki(bot, msg):
     else :
 
         pass
-    msg.reply_chat_action(enums.ChatAction.TYPING)
+    await msg.reply_chat_action(enums.ChatAction.TYPING)
      
 
     try :
 
       data = {
-    'uid': '7bbfe7ea7a1eeea4',
+    'uid': '4e937c67cc0880db',
     'input': msg.text,
-    'sessionid': '483805423',
+    'sessionid': '483819942',
 }
 
       resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
