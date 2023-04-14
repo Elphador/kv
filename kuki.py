@@ -399,9 +399,13 @@ async def kuki(bot, msg):
     try :
 
       data = {
-    'uid': '4e937c67cc0880db',
+
+    'uid': '2af7c6097a64284d',
+
     'input': msg.text,
-    'sessionid': '483819942',
+
+    'sessionid': '483826807',
+
 }
 
       resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
