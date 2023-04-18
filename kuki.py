@@ -420,7 +420,7 @@ async def kuki(bot, msg):
 
         header = {'Content-Type': 'application/x-www-form-urlencoded',}
 
-        data = f'botkey=Tdf8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
+        data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
 
         resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
 
