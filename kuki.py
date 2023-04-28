@@ -84,7 +84,7 @@ def convv (bot , msg):
         print(resp.text)
         aqe = json.loads(resp.text);lst = aqe['responses'][0] 
         msg.reply(lst)
-        except KeyError :
+    except KeyError :
             header = {'Content-Type': 'application/x-www-form-urlencoded',}
             data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
             resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
@@ -115,7 +115,7 @@ def rrrt (bot, msg):
         print(resp.text)
         aqe = json.loads(resp.text);lst = aqe['responses'][0] 
         msg.reply(lst)
-        except KeyError :
+    except KeyError :
             header = {'Content-Type': 'application/x-www-form-urlencoded',}
             data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
             resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
