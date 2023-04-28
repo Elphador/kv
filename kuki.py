@@ -52,10 +52,114 @@ mark = InlineKeyboardMarkup([[InlineKeyboardButton("🥬team Neural 🌽",url = 
 
 app = Client ("grabber",api_id=api_id,api_hash=api_hash, bot_token=bot_token)
 
-cli = MongoClient(mongodb); db = cli.database; cuser = db.cuser ; cadmin = db.cadmin ; force = db.force ; newbots = db.newbots
+cli = MongoClient(mongodb); db = cli.database; groupu=db.group ;cuser = db.cuser ; cadmin = db.cadmin ; force = db.force ; newbots = db.newbots
 
+
+@app.on_message(filters.group & filters.reply)
+def convv (bot , msg):
+    chat_id = msg.chat.id 
+    e = app.get_messages(chat_id, msg.reply_to_message_id).from_user.id
+    e = int(e) 
+    if e ==5759372798  :
+        msg.reply_chat_action(enums.ChatAction.TYPING)
+        text = msg.text
+       # text = text.replace("kuki", "")
+      #  msg.reply(text)
+    stats = force.find_one({"frc":"frc"})
+    if stats['status'] == 'on' :
+        try :
+          bot.get_chat_member(-1001776406696 ,msg.from_user.id)
+        except UserNotParticipant:
+            msg.reply("**Sorry i can't help you a lot on this ,Join the channel before our conversation**",
+            reply_markup = InlineKeyboardMarkup([[channel]]))
+            return
+    else :
+        pass  
+    try :
+        data = {
+            'uid': '2af7c6097a64284d',
+            'input': msg.text,
+            'sessionid': '483826807',}
+        resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
+        print(resp.text)
+        aqe = json.loads(resp.text);lst = aqe['responses'][0] 
+        msg.reply(lst)
+        except KeyError :
+            header = {'Content-Type': 'application/x-www-form-urlencoded',}
+            data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
+            resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
+            print(resp.text)
+            aqe = json.loads(resp.text);lst = aqe['responses'][0]
+            msg.reply(lst)
+        #except Exception as e:
+        #await msg.reply(e)
+@app.on_message(filters.group & filters.regex(r"Kuki|kuki"))
+def rrrt (bot, msg):
+    msg.reply_chat_action(enums.ChatAction.TYPING)
+    stats = force.find_one({"frc":"frc"})
+    if stats['status'] == 'on' :
+        try :
+          bot.get_chat_member(-1001776406696 ,msg.from_user.id)
+        except UserNotParticipant:
+            msg.reply("**Sorry i can't help you a lot on this ,Join the channel before our conversation**",
+            reply_markup = InlineKeyboardMarkup([[channel]]))
+            return
+    else :
+        pass  
+    try :
+        data = {
+            'uid': '2af7c6097a64284d',
+            'input': msg.text,
+            'sessionid': '483826807',}
+        resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
+        print(resp.text)
+        aqe = json.loads(resp.text);lst = aqe['responses'][0] 
+        msg.reply(lst)
+        except KeyError :
+            header = {'Content-Type': 'application/x-www-form-urlencoded',}
+            data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
+            resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
+            print(resp.text)
+            aqe = json.loads(resp.text);lst = aqe['responses'][0]
+            msg.reply(lst)
+        #except Exception as e:
+        #await msg.reply(e)   
+        
+@app.on_message(filters.private & filters.command("castg"))
+async def cast_mesggp(bot,msg):
+    txt = msg.text
+    blocked = " "
+    idinvalid  = " "
+    deactive = " "
+    cast_text = txt.replace('/castg',"")
+    for user in groupu.find():
+        try :
+            await bot.send_message(user['userid'],f" Hey {user['name']}🤗\n{cast_text}", reply_markup=mark)
+        except UserIsBlocked:
+            blocked+=f"{user['userid']} : {user['name']} :  @{user['username']}\n"
+        except InputUserDeactivated:
+            deactive+=f"{user['userid']} : {user['name']} : {user['username']}\n"
+        except PeerIdInvalid:
+            idinvalid+=f" {user['userid']} : {user['name']} : {user['username']}\n"
+        except FloodWait as e:
+            await asyncio.sleep(e.x)     
+        except Exception as error:
+          await msg.reply(error)
+    await msg.reply(f"**Cast Logs**\n\n**Blocked Groups**\n{blocked}\n**Invalid Ids**\n{idinvalid}**\nDeactivated**\n{deactive}")          
+@app.on_message( filters.private & filters.command("groups")) 
+def gp_count (bot, msg):
+     count = groupu.find()
+     counting = len(list(count))
+     msg.reply(f"**we have {counting} Group users at this moment🦝**")
+         
+@app.on_message(filters.command("grouplist")) 
+async def grouplist(bot,msg):
+    names =""
+    load = await msg.reply("`Loading .......`")
+    for usr in groupu.find():
+        names+=f"{usr['name']} => @{usr['username']} => {usr['userid']} => Joined in {usr['date']}\n"
+        await load.edit(names)    
     
-
 @app.on_message(filters.command("cast"))
 
 async def cast_mesg(bot,msg):
@@ -370,7 +474,7 @@ async def userslist(bot,msg):
 
 #always we change the codes down here for different bots just we copy and paste the above code to implement all functions on each of our bots , you can take some actions if it's needed, aka , if you need 
 
-@app.on_message( filters.text)
+@app.on_message( filters.private & filters.text)
 
 async def kuki(bot, msg):
 
