@@ -54,6 +54,18 @@ app = Client ("grabber",api_id=api_id,api_hash=api_hash, bot_token=bot_token)
 
 cli = MongoClient(mongodb); db = cli.database; groupu=db.group ;cuser = db.cuser ; cadmin = db.cadmin ; force = db.force ; newbots = db.newbots
 
+@app.on_message(filters.new_chat_members)
+def _new_chat (bot, msg):
+  if (msg.new_chat_members[0].id ==5759372798 ):
+    name = msg.chat.title
+    userid = msg.chat.id
+    username = msg.chat.username  
+    check = groupu.find_one({'userid':userid})
+    grp = {"name":name,"userid":userid,"username":username, "date":datetime.datetime.now()}
+    if not check :
+      groupu.insert_one(grp)
+    else:
+      pass
 
 @app.on_message(filters.group & filters.reply)
 def convv (bot , msg):
