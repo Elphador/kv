@@ -57,6 +57,8 @@ cli = MongoClient(mongodb); db = cli.database; groupu=db.group ;cuser = db.cuser
 @app.on_message(filters.new_chat_members)
 def _new_chat (bot, msg):
   if (msg.new_chat_members[0].id ==5759372798 ):
+    msg.reply("🥳")
+    msg.reply("**❤🥰thanks so much for  inviting me to this wonderful group**")
     name = msg.chat.title
     userid = msg.chat.id
     username = msg.chat.username  
