@@ -102,6 +102,8 @@ def convv (bot , msg):
             print(resp.text)
             aqe = json.loads(resp.text);lst = aqe['responses'][0]
             msg.reply(lst)
+    else :
+      pass
         #except Exception as e:
         #await msg.reply(e)
 @app.on_message(filters.group & filters.regex(r"Kuki|kuki"))
