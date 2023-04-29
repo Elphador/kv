@@ -68,7 +68,6 @@ def _new_chat (bot, msg):
       groupu.insert_one(grp)
     else:
       pass
-
 @app.on_message(filters.group & filters.reply)
 def convv (bot , msg):
     chat_id = msg.chat.id 
@@ -77,32 +76,26 @@ def convv (bot , msg):
     if e ==5759372798  :
         msg.reply_chat_action(enums.ChatAction.TYPING)
         text = msg.text
-        return 
-    else :
-      pass 
-      return
-       # text = text.replace("kuki", "")
-      #  msg.reply(text)
-    stats = force.find_one({"frc":"frc"})
-    if stats['status'] == 'on' :
-        try :
-          bot.get_chat_member(-1001776406696 ,msg.from_user.id)
-        except UserNotParticipant:
+        stats = force.find_one({"frc":"frc"})
+        if stats['status'] == 'on' :
+          try :
+            bot.get_chat_member(-1001776406696 ,msg.from_user.id)
+          except UserNotParticipant:
             msg.reply("**Sorry i can't help you a lot on this ,Join the channel before our conversation**",
             reply_markup = InlineKeyboardMarkup([[channel]]))
             return
-    else :
-        pass  
-    try :
-        data = {
+        else :
+          pass  
+        try :
+          data = {
             'uid': '2af7c6097a64284d',
             'input': msg.text,
             'sessionid': '483826807',}
-        resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
-        print(resp.text)
-        aqe = json.loads(resp.text);lst = aqe['responses'][0] 
-        msg.reply(lst)
-    except KeyError :
+          resp = requests.post('https://kuli.kuki.ai/cptalk', headers=headers, data=data)
+          print(resp.text)
+          aqe = json.loads(resp.text);lst = aqe['responses'][0] 
+          msg.reply(lst)
+        except KeyError :
             header = {'Content-Type': 'application/x-www-form-urlencoded',}
             data = f'botkey=df8b1112f6c7bbc9e66762d5c0bd6d9c4919fc95fcced10dbf6d7890608e1638&input={msg.text}&client_name=foo'
             resp = requests.post('https://devman.kuki.ai/talk', headers=header, data=data)
