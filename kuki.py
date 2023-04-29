@@ -77,6 +77,10 @@ def convv (bot , msg):
     if e ==5759372798  :
         msg.reply_chat_action(enums.ChatAction.TYPING)
         text = msg.text
+        return 
+    else :
+      pass 
+      return
        # text = text.replace("kuki", "")
       #  msg.reply(text)
     stats = force.find_one({"frc":"frc"})
